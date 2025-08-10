@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "university_histories",
+  "info": {
+    "singularName": "university-history",
+    "pluralName": "university-histories",
+    "displayName": "UniversityHistory "
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "TimeLine": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

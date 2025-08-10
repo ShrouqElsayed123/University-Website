@@ -1,0 +1,27 @@
+{
+    "kind": "collectionType",
+    "collectionName": "university_infos",
+    "info": {
+        "singularName": "university-info",
+        "pluralName": "university-infos",
+        "displayName": "UniversityInfo"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
+    "attributes": {
+        "visionmission": {
+            "type": "json",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        }
+    }
+}

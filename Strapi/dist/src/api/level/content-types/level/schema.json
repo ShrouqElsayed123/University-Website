@@ -1,0 +1,41 @@
+{
+    "kind": "collectionType",
+    "collectionName": "levels",
+    "info": {
+        "singularName": "level",
+        "pluralName": "levels",
+        "displayName": "Level"
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "pluginOptions": {
+        "i18n": {
+            "localized": true
+        }
+    },
+    "attributes": {
+        "level_faculty": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::university-faculties.university-faculties",
+            "inversedBy": "levels"
+        },
+        "level": {
+            "type": "json",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        },
+        "name": {
+            "type": "string",
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            }
+        }
+    }
+}

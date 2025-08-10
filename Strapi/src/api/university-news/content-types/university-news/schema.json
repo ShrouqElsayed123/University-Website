@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "university_news1",
+  "info": {
+    "singularName": "university-news",
+    "pluralName": "university-news1",
+    "displayName": "University News"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "news": {
+      "type": "json",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}
