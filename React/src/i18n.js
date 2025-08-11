@@ -33,6 +33,9 @@ const resources = {
 
       building: "Facilities and <highlight>buildings</highlight>",
       contact: "Contact <highlight>Us</highlight>",
+      feedback: " Our Students <highlight>Feedback</highlight>",
+      toverview: " Overview",
+      overview: "Faculty Overview"
     }
   },
   ar: {
@@ -63,7 +66,10 @@ const resources = {
       Sustainable: "التنمية المستدامة",
 
       building: " المرافق و <highlight>المباني </highlight>",
-      contact: "تواصل  <highlight>معنا</highlight>"
+      contact: "تواصل  <highlight>معنا</highlight>",
+      feedback: " أراء  <highlight>طلابنا</highlight>",
+      toverview: "نظرة عامة",
+      overview: "نظرة عامة عن الكلية"
 
     }
   }

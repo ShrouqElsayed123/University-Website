@@ -1,6 +1,6 @@
-import React from "react";
 
 export default function FacultyGoal({ goals }) {
+
     return (
         <div className="p-6 bg-gray-100 flex flex-col items-center">
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">🎯 {goals.title}</h2>
