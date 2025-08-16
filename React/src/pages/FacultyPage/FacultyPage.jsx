@@ -6,7 +6,10 @@ import axios from "axios";
 import FacultyGoal from "../../components/FaculitiesComponent/FacultyGoal";
 import OverviewSection from "../../components/FaculitiesComponent/OverviewSection";
 import { useTranslation } from "react-i18next";
-import FacultyVision from "../../components/FaculitiesComponent/FacultyVision";
+import FacultyVision from "../../components/FaculitiesComponent/FacultyOverview";
+import Header from "../../components/FaculitiesComponent/Header";
+import FacultyOverview from "../../components/FaculitiesComponent/FacultyOverview";
+import FacultyGallery from "../../components/FaculitiesComponent/FacultyGallery/FacultyGallery";
 
 export default function FacultyPage() {
     const { slug } = useParams(); // ناخد الـ slug من الرابط
@@ -15,6 +18,8 @@ export default function FacultyPage() {
     const [error, setError] = useState(null);
     const { i18n } = useTranslation();
     const currentLang = i18n.language;
+    const { t } = useTranslation();
+
     useEffect(() => {
         const fetchFaculty = async () => {
             setLoading(true);
@@ -47,9 +52,17 @@ export default function FacultyPage() {
 
     return (
         <div className="space-y-8 p-4">
-            <FacultyVision vision={facultyData.Vision} mission={facultyData.Mission} />
-            <FacultyGoal goals={facultyData.ProgramObjectives} />
-            <OverviewSection FacultyOverview={facultyData.FacultyOverview} ProgramOverview={facultyData.ProgramOverview} />
+
+            <Header
+                links={[
+                    { to: "/", label: t('home') },
+                    { to: "/", label: "Faculty of Medicine" },
+                ]}
+            />
+            {/* <FacultyGoal /> */}
+
+            <FacultyOverview />
+            <FacultyGallery />
         </div>
     );
 }

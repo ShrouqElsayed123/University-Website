@@ -11,7 +11,7 @@ export default function HomeContact() {
         <>
             <section
 
-                className=" bg-gray-50  transition-colors duration-300 my-home-section-margin p-home-section-padding"
+                className=" bg-gray-50  transition-colors duration-300 my-home-section-margin  p-home-section-padding"
 
                 data-aos="zoom-in-up"
             >

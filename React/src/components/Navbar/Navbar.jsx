@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTheme } from "../../context/ThemeContext.jsx";
+// import { useTheme } from "../../context/ThemeContext.jsx";
 
 
 import { NavLink } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function Navbar() {
   const dropdownRef = useRef(null);
   const { t, i18n } = useTranslation();
 
-  const { darkMode, toggleTheme } = useTheme();
+  // const { darkMode, toggleTheme } = useTheme();
   const currentLang = i18n.language;
 
   const toggleLanguage = () => {
@@ -208,13 +208,13 @@ export default function Navbar() {
                   )}
                 </button>
               </li>
-              <li>
+              {/* <li>
                 <button
                   onClick={toggleTheme}
                   className="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
                   {darkMode ? "☀️" : "🌙"}
                 </button>
-              </li>
+              </li> */}
 
             </ul>
           </div>

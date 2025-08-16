@@ -23,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 import UniversityProgram from '../../components/AboutComponent/AboutUniversity/UniversityProgram'
 import ContactUsPage from '../ContactUsPage/ContactUsPage'
 import HomeContact from '../../components/HomeComponent/HomeContact/HomeContact'
+import Testimonials from '../../components/Testimonials/Testimonials'
 
 
 export default function Home() {
@@ -79,7 +80,7 @@ export default function Home() {
       <ImageSlider />
       <HomeFaculties />
 
-
+      <Testimonials />
 
       <HomeContact />
 

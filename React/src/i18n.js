@@ -18,6 +18,8 @@ const resources = {
       stats: "Our Stats",
       gallery: "Our Gallery <highlight>Photo</highlight>",
       tgallery: "Our Gallery",
+      fgallery: "Faculty <highlight>Gallery</highlight>",
+      
       new: "Latest News and <highlight>Articles</highlight>",
       tnew: "Our News",
       more: "Read More",
@@ -33,6 +35,9 @@ const resources = {
 
       building: "Facilities and <highlight>buildings</highlight>",
       contact: "Contact <highlight>Us</highlight>",
+      feedback: " Our Students <highlight>Feedback</highlight>",
+      toverview: " Overview",
+      overview: "Faculty Overview"
     }
   },
   ar: {
@@ -48,6 +53,8 @@ const resources = {
       stats: "إحصائياتنا",
       gallery: "  معرض <highlight>الصور</highlight> لدينا",
       tgallery: "معرضنا ",
+      fgallery: "الكلية <highlight>معرض</highlight>",
+
       new: "آخر الأخبار و <highlight>المقالات</highlight>",
       tnew: "اخبارنا",
       more: "اقرأ المزيد",
@@ -63,7 +70,10 @@ const resources = {
       Sustainable: "التنمية المستدامة",
 
       building: " المرافق و <highlight>المباني </highlight>",
-      contact: "تواصل  <highlight>معنا</highlight>"
+      contact: "تواصل  <highlight>معنا</highlight>",
+      feedback: " أراء  <highlight>طلابنا</highlight>",
+      toverview: "نظرة عامة",
+      overview: "نظرة عامة عن الكلية"
 
     }
   }
