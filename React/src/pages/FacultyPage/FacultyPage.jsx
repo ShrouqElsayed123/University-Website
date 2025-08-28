@@ -10,6 +10,8 @@ import FacultyVision from "../../components/FaculitiesComponent/FacultyOverview"
 import Header from "../../components/FaculitiesComponent/Header";
 import FacultyOverview from "../../components/FaculitiesComponent/FacultyOverview";
 import FacultyGallery from "../../components/FaculitiesComponent/FacultyGallery/FacultyGallery";
+import FacultyDoctors from "../../components/FaculitiesComponent/FacultyGallery/FacultyDoctors";
+import FacultyLevels from "../../components/FaculitiesComponent/FacultyLevels";
 
 export default function FacultyPage() {
     const { slug } = useParams(); // ناخد الـ slug من الرابط
@@ -63,6 +65,8 @@ export default function FacultyPage() {
 
             <FacultyOverview />
             <FacultyGallery />
+            <FacultyDoctors />
+            <FacultyLevels />
         </div>
     );
 }

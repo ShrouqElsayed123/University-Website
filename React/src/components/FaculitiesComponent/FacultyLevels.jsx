@@ -1,94 +1,113 @@
-import React, { useState } from "react";
-const facultyLevels = [
+
+import { useState } from "react";
+import { ShoppingCart, CreditCard, Gift, Package } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
+import { HiOutlineBuildingLibrary } from "react-icons/hi2";
+
+const tabs = [
   {
-    id: 1,
-    name: "Level 1",
-    semesters: {
-      "First Semester": ["Biology", "Mathematics", "Chemistry"],
-      "Second Semester": ["Physics", "Computer Science", "English"],
-    },
+    id: "choose",
+    label: "Choose",
+    icon: <ShoppingCart size={24} />,
+    title: "Choose your item",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at viverra est, eu finibus mauris.",
   },
   {
-    id: 2,
-    name: "Level 2", 
-    semesters: {
-      "First Semester": ["Anatomy", "Genetics", "Biostatistics"],
-      "Second Semester": ["Microbiology", "Pathology"],
-    },
+    id: "pay",
+    label: "Pay",
+    icon: <CreditCard size={24} />,
+    title: "Secure Payment",
+    content:
+      "Quisque tempus vestibulum fringilla. Morbi tortor eros, sollicitudin eu arcu sit amet, aliquet sagittis dolor.",
   },
   {
-    id: 3,
-    name: "Level 3",
-    semesters: {
-      "First Semester": ["Pharmacology", "Medical Ethics"],
-      "Second Semester": ["Clinical Skills", "Health Systems"],
-    },
+    id: "wrap",
+    label: "Wrap",
+    icon: <Gift size={24} />,
+    title: "We will wrap it",
+    content:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at viverra est, eu finibus mauris.",
   },
   {
-    id: 4,
-    name: "Level 4",
-    semesters: {
-      "First Semester": ["Surgery I", "Internal Medicine I"],
-      "Second Semester": ["Surgery II", "Internal Medicine II"],
-    },
+    id: "ship",
+    label: "Ship",
+    icon: <Package size={24} />,
+    title: "We ship it",
+    content:
+      "Quisque tempus vestibulum fringilla. Morbi tortor eros, sollicitudin eu arcu sit amet, aliquet sagittis dolor.",
   },
 ];
-
 export default function FacultyLevels() {
-  const [openLevel, setOpenLevel] = useState(null);
+  const [activeTab, setActiveTab] = useState("wrap");
+  const { t } = useTranslation();
 
-  const toggleLevel = (id) => {
-    setOpenLevel(openLevel === id ? null : id);
-  };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 space-y-6">
-      {facultyLevels.map((level) => {
-        const semesters = Object.entries(level.semesters);
-        const maxCourses = Math.max(...semesters.map(([_, courses]) => courses.length));
-
-        return (
-          <div key={level.id} className="bg-white border rounded-lg shadow-md">
-            {/* Accordion Header */}
+    <section className="px-6 py-12 max-w-7xl mx-auto">
+      <div className="text-center flex items-center flex-col gap-3">
+        <div className="flex items-center gap-2 text-secondaryColorLight1 cursor-pointer select-none border-b-[1px] border-secondaryColorLight1 w-fit">
+          <HiOutlineBuildingLibrary className="w-6 h-6" />
+          <span className="text-sm  tracking-widest uppercase">
+            {t('tcourse')}
+          </span>
+        </div>
+        <div className="text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            <Trans
+              i18nKey="course"
+              components={{ highlight: <span className="text-mainColor" /> }}
+            />
+          </h2>
+        </div>
+      </div>
+      {/* الشبكة */}
+      <div className="flex flex-col md:flex-row border rounded-xl shadow-md overflow-hidden">
+        {/* Tabs */}
+        <div className="flex md:flex-col border-b md:border-b-0 md:border-r bg-gray-50 w-full md:w-48">
+          {tabs.map((tab) => (
             <button
-              onClick={() => toggleLevel(level.id)}
-              className="w-full text-left px-6 py-4 bg-gray-100 hover:bg-gray-200 flex justify-between items-center text-lg font-bold text-mainColor"
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 md:gap-3 p-4 w-full text-sm font-medium transition 
+              ${activeTab === tab.id
+                  ? "text-red-500 border-l-4 md:border-l-0 md:border-r-4 border-red-500 bg-white"
+                  : "text-gray-500 hover:text-gray-800"
+                }`}
             >
-              {level.name}
-              <span>{openLevel === level.id ? "−" : "+"}</span>
+              <span className="text-xl">{tab.icon}</span>
+              <span className="hidden md:inline">{tab.label}</span>
             </button>
+          ))}
+        </div>
 
-            {/* Accordion Content */}
-            {openLevel === level.id && (
-              <div className="p-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {semesters.map(([semesterName, courses]) => (
-                    <div key={semesterName} className="bg-gray-50 rounded-lg p-4 shadow-sm">
-                      <h3 className="text-center font-semibold text-secondaryColor border-b pb-2 mb-3">
-                        {semesterName}
-                      </h3>
-                      <ul className="space-y-2">
-                        {courses.length > 0 ? (
-                          courses.map((course, index) => (
-                            <li
-                              key={index}
-                              className="border-b pb-1 text-gray-700 hover:text-mainColor transition"
-                            >
-                              📘 {course}
-                            </li>
-                          ))
-                        ) : (
-                          <li className="text-gray-400 italic">No courses</li>
-                        )}
-                      </ul>
-                    </div>
-                  ))}
+        {/* Content */}
+        <div className="flex-1 p-6 text-center md:text-left">
+          {tabs.map(
+            (tab) =>
+              tab.id === activeTab && (
+                <div key={tab.id}>
+                  <div className="flex justify-center md:justify-start mb-4 text-gray-600">
+                    {tab.icon}
+                  </div>
+                  <h2 className="text-2xl font-bold mb-2">{tab.title}</h2>
+                  <p className="text-gray-600">{tab.content}</p>
                 </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
+              )
+          )}
+        </div>
+      </div>
+
+    </section>
+
+
+
+
+
   );
 }
+
+
+
+
+

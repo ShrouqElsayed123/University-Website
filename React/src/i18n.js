@@ -19,7 +19,7 @@ const resources = {
       gallery: "Our Gallery <highlight>Photo</highlight>",
       tgallery: "Our Gallery",
       fgallery: "Faculty <highlight>Gallery</highlight>",
-      
+
       new: "Latest News and <highlight>Articles</highlight>",
       tnew: "Our News",
       more: "Read More",
@@ -37,7 +37,12 @@ const resources = {
       contact: "Contact <highlight>Us</highlight>",
       feedback: " Our Students <highlight>Feedback</highlight>",
       toverview: " Overview",
-      overview: "Faculty Overview"
+      overview: "Faculty Overview",
+
+      tdoctors: "Professors",
+      doctors: "Our Professional  <highlight>Professors</highlight>",
+      tcourse: "Faculty&Courses",
+      course: "Faculty levels and  <highlight>courses</highlight>"
     }
   },
   ar: {

@@ -22,9 +22,9 @@ export default {
         thirdColor2: '#06a26c',
       },
       spacing: {
-        'home-section-gap': '16px', // مثال لقيمة 40px
-        'home-section-margin': '20px',   // مثال لقيمة 20px
-        'home-section-padding': '40px',   // مثال لقيمة 20px
+        'home-section-gap': '16px',
+        'home-section-margin': '20px',
+        'home-section-padding': '40px',
       },
       keyframes: {
         rotate: {
@@ -34,11 +34,18 @@ export default {
         fadeIn: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 }
-        }
+        },
+        // 🔽 هنا ضيفنا الـ floating
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
       },
       animation: {
         rotate: 'rotate 30s linear infinite',
-        'fade-in': 'fadeIn 0.7s ease-in-out'
+        'fade-in': 'fadeIn 0.7s ease-in-out',
+        // 🔽 هنا ضيفنا أنيميشن جديدة
+        float: 'float 5s ease-in-out infinite',
       }
     },
   },

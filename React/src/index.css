@@ -68,3 +68,11 @@ body {
     @apply absolute top-0 left-0 w-full h-full rounded-sm object-cover [transition:2s] sm:hover:-translate-y-[50px] hover:-translate-y-[20px] hover:scale-[1.3];
   }
 }
+
+
+.animation-delay-0 {
+  animation-delay: 0s;
+}
+.animation-delay-1500 {
+  animation-delay: 1.5s;
+}
