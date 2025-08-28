@@ -24,6 +24,7 @@ import UniversityProgram from '../../components/AboutComponent/AboutUniversity/U
 import ContactUsPage from '../ContactUsPage/ContactUsPage'
 import HomeContact from '../../components/HomeComponent/HomeContact/HomeContact'
 import Testimonials from '../../components/Testimonials/Testimonials'
+import FAQSection from '../../components/HomeComponent/FAQSection/FAQSection'
 
 
 export default function Home() {
@@ -79,7 +80,7 @@ export default function Home() {
       {/* <OpenApply /> */}
       <ImageSlider />
       <HomeFaculties />
-
+      <FAQSection />
       <Testimonials />
 
       <HomeContact />

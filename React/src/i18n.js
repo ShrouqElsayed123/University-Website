@@ -38,6 +38,8 @@ const resources = {
       feedback: " Our Students <highlight>Feedback</highlight>",
       toverview: " Overview",
       overview: "Faculty Overview",
+      tfaq:"FAQS",
+      faq:"Frequently Asked <highlight>Questions</highlight> ",
 
       tdoctors: "Professors",
       doctors: "Our Professional  <highlight>Professors</highlight>",
