@@ -1,27 +1,24 @@
 import { useEffect, useRef, useState } from "react";
-// import { useTheme } from "../../context/ThemeContext.jsx";
-
-
 import { NavLink } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
 
 import logo from "../../assets/images/logo.png";
 import ukFlag from "../../assets/images/usa.svg";
 import saFlag from "../../assets/images/egypt.svg";
 import { useTranslation } from "react-i18next";
-import { Moon, Sun } from "lucide-react";
+
+import navItemsData from "../Data/NavbarList.json"; // ✅ هنا جبنا البيانات
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [navItems, setNavItems] = useState([]);
+  const [navItems] = useState(navItemsData); // ✅ استخدمنا البيانات من الملف
   const dropdownRef = useRef(null);
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
 
-  // const { darkMode, toggleTheme } = useTheme();
   const currentLang = i18n.language;
 
   const toggleLanguage = () => {
@@ -42,21 +39,6 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // جلب بيانات الـ Navbar من Strapi
-  useEffect(() => {
-    async function fetchNavbar() {
-      try {
-        const res = await axios.get(`http://localhost:1337/api/navbar-lists1?locale=${currentLang}`);
-        const items = res.data.data[0]?.navbarlist || [];
-        setNavItems(items);
-      } catch (error) {
-        console.error("خطأ أثناء تحميل قائمة التنقل:", error);
-      }
-    }
-
-    fetchNavbar();
-  }, [currentLang]);
-
   // إغلاق القوائم عند الضغط خارجها
   useEffect(() => {
     function handleClickOutside(e) {
@@ -69,24 +51,9 @@ export default function Navbar() {
   }, []);
 
   const dropdownVariants = {
-    hidden: {
-      opacity: 0,
-      y: -5,
-      transition: { duration: 0.2, ease: "easeInOut" },
-      pointerEvents: "none"
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3, ease: "easeOut" },
-      pointerEvents: "auto"
-    },
-    exit: {
-      opacity: 0,
-      y: -5,
-      transition: { duration: 0.25, ease: "easeIn" },
-      pointerEvents: "none"
-    }
+    hidden: { opacity: 0, y: -5, transition: { duration: 0.2, ease: "easeInOut" }, pointerEvents: "none" },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" }, pointerEvents: "auto" },
+    exit: { opacity: 0, y: -5, transition: { duration: 0.25, ease: "easeIn" }, pointerEvents: "none" }
   };
 
 
@@ -116,11 +83,13 @@ export default function Navbar() {
                     <li key={index}>
                       <NavLink
                         to={item.path}
-                        className={function ({ isActive }) { return isActive ? "text-mainColor block py-2 px-3  font-bold md:p-0" : "block py-2 px-3 md:p-0"; }}
-
-
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-mainColor block py-2 px-3 font-bold md:p-0"
+                            : "block py-2 px-3 md:p-0"
+                        }
                       >
-                        {t(item.title)}
+                        {item.title[currentLang]}
                       </NavLink>
                     </li>
                   );
@@ -128,19 +97,19 @@ export default function Navbar() {
 
                 if (item.type === "dropdown") {
                   return (
-                    <li key={index} className="relative" ref={openDropdown === item.title ? dropdownRef : null}>
+                    <li key={index} className="relative" ref={openDropdown === item.title[currentLang] ? dropdownRef : null}>
                       <button
-                        onClick={() => setOpenDropdown(openDropdown === item.title ? null : item.title)}
+                        onClick={() => setOpenDropdown(openDropdown === item.title[currentLang] ? null : item.title[currentLang])}
                         className="flex items-center justify-between gap-1 py-2 px-3 text-gray-700 hover:text-mainColor dark:text-white md:p-0 w-full"
                       >
-                        {t(item.title)}
+                        {item.title[currentLang]}
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M5.5 7l4.5 4.5L14.5 7" />
                         </svg>
                       </button>
 
                       <AnimatePresence>
-                        {openDropdown === item.title && (
+                        {openDropdown === item.title[currentLang] && (
                           <motion.ul
                             initial="hidden"
                             animate="visible"
@@ -156,17 +125,16 @@ export default function Navbar() {
                                   to={subItem.path}
                                   className={({ isActive }) =>
                                     isActive
-                                      ? "block px-3 py-2 hover:bg-gray-100-100 rounded text-mainColor"
-                                      : "block px-3 py-2 hover:bg-gray-100-100 rounded"
+                                      ? "block px-3 py-2 hover:bg-gray-100 rounded text-mainColor"
+                                      : "block px-3 py-2 hover:bg-gray-100 rounded"
                                   }
                                   onClick={() => {
-                                    setIsOpen(false); // قفل المينيو في الموبايل
-                                    setOpenDropdown(null); // قفل الـ dropdown نفسه
+                                    setIsOpen(false);
+                                    setOpenDropdown(null);
                                   }}
                                 >
-                                  {t(subItem.title)}
+                                  {subItem.title[currentLang]}
                                 </NavLink>
-
                               </li>
                             ))}
                           </motion.ul>
@@ -179,13 +147,14 @@ export default function Navbar() {
                 if (item.type === "button") {
                   return (
                     <li key={index}>
-                      <div className="btn-filled2">{t(item.title)}</div>
+                      <div className="btn-filled2">{item.title[currentLang]}</div>
                     </li>
                   );
                 }
 
                 return null;
               })}
+
 
               {/* زر تغيير اللغة */}
               <li>
@@ -222,4 +191,4 @@ export default function Navbar() {
       </nav>
     </div>
   );
-}
+}  

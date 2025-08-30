@@ -21,6 +21,16 @@ import FacultyPage from './pages/FacultyPage/FacultyPage';
 import Elearning from "./components/ElectronicPlatform/Elearning";
 import StudentPortal from "./components/ElectronicPlatform/StudentPortal";
 import StudentPortalSection from "./components/ElectronicPlatform/StudentPortal";
+import Dentistry from "./pages/facultiesPages/Dentistry";
+import Medicine from "./pages/facultiesPages/Medicine";
+import Engineering from "./pages/facultiesPages/Engineering";
+import HealthSciences from "./pages/facultiesPages/HealthSciences";
+import Humanities from "./pages/facultiesPages/Humanities";
+import VeterinaryMedicine from "./pages/facultiesPages/VeterinaryMedicine";
+import PhysicalTherapy from "./pages/facultiesPages/PhysicalTherapy";
+import Pharmacy from "./pages/facultiesPages/Pharmacy";
+import Nursing from "./pages/facultiesPages/Nursing";
+import ArtificialIntelligence from "./pages/facultiesPages/ArtificialIntelligence";
 
 function App() {
   const { i18n } = useTranslation();
@@ -71,7 +81,16 @@ function App() {
         { path: 'facultygoal', element: <FacultyGoal /> },
         { path: '/FacultyLevels', element: <FacultyLevels /> },
         // { path: 'overviewsection', element: <OverviewSection /> },
-        { path: '/faculties/:slug', element: <FacultyPage /> },
+        { path: 'medicine', element: <Medicine /> },
+        { path: 'dentistry', element: <Dentistry /> },
+        { path: 'engineering', element: <Engineering /> },
+        { path: 'healthsciences', element: <HealthSciences /> },
+        { path: 'humanities', element: <Humanities /> },
+        { path: 'veterinarymedicine', element: <VeterinaryMedicine/> },
+        { path: 'physicaltherapy', element: <PhysicalTherapy /> },
+        { path: 'pharmacy', element: <Pharmacy /> },
+        { path: 'nursing', element: <Nursing /> },
+        { path: 'artificialintelligence', element: <ArtificialIntelligence /> },
         { path: 'studentportalsection', element: <StudentPortalSection /> },
 
       ]
