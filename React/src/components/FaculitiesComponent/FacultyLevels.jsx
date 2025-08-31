@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HiOutlineBuildingLibrary } from "react-icons/hi2";
 import { FaBookOpen } from "react-icons/fa";
 import { Trans, useTranslation } from "react-i18next";
+import { ChevronDown } from "lucide-react";
 
 const tabs = [
   {
@@ -97,7 +98,10 @@ const tabs = [
 export default function FacultyLevels() {
   const [activeTab, setActiveTab] = useState("1");
   const { t } = useTranslation();
-
+ const [openSemester, setOpenSemester] = useState(null); 
+ const toggleSemester = (index) => {
+    setOpenSemester(openSemester === index ? null : index);
+  };
   return (
     <section className="px-6 py-12 max-w-7xl mx-auto">
       {/* Header */}
@@ -148,17 +152,34 @@ export default function FacultyLevels() {
                 <h3 className="text-xl font-semibold mb-4">{tab.title}</h3>
 
                 {/* Show semesters */}
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {tab.content.map((section, i) => (
-                    <div key={i} className="border rounded-lg p-4 shadow-sm">
-                      <h4 className="text-lg font-medium mb-2 text-mainColor">
-                        {section.title}
-                      </h4>
-                      <ul className="list-disc list-inside text-gray-700 space-y-1">
-                        {section.courses.map((course, idx) => (
-                          <li key={idx}>{course}</li>
-                        ))}
-                      </ul>
+                    <div
+                      key={i}
+                      className="border rounded-lg shadow-sm overflow-hidden"
+                    >
+                      <button
+                        onClick={() => toggleSemester(i)}
+                        className="flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200"
+                      >
+                        <span className="text-mainColor font-medium">{section.title}</span>
+                        <ChevronDown
+                          className={`w-5 h-5 transition-transform ${
+                            openSemester === i ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <div
+                        className={`transition-max-height duration-300 overflow-hidden ${
+                          openSemester === i ? "max-h-[1000px]" : "max-h-0"
+                        }`}
+                      >
+                        <ul className="list-disc list-inside text-gray-700 p-4 space-y-1">
+                          {section.courses.map((course, idx) => (
+                            <li key={idx}>{course}</li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   ))}
                 </div>
