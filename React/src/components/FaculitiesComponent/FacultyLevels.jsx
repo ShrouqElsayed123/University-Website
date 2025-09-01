@@ -98,10 +98,17 @@ const tabs = [
 export default function FacultyLevels() {
   const [activeTab, setActiveTab] = useState("1");
   const { t } = useTranslation();
- const [openSemester, setOpenSemester] = useState(null); 
- const toggleSemester = (index) => {
-    setOpenSemester(openSemester === index ? null : index);
+
+  // state لكل Tab بحيث كل level يبقى مستقل
+  const [openSemester, setOpenSemester] = useState({});
+
+  const toggleSemester = (tabId, index) => {
+    setOpenSemester((prev) => ({
+      ...prev,
+      [tabId]: prev[tabId] === index ? null : index,
+    }));
   };
+
   return (
     <section className="px-6 py-12 max-w-7xl mx-auto">
       {/* Header */}
@@ -159,19 +166,23 @@ export default function FacultyLevels() {
                       className="border rounded-lg shadow-sm overflow-hidden"
                     >
                       <button
-                        onClick={() => toggleSemester(i)}
+                        onClick={() => toggleSemester(tab.id, i)}
                         className="flex justify-between items-center w-full p-4 bg-gray-100 hover:bg-gray-200"
                       >
-                        <span className="text-mainColor font-medium">{section.title}</span>
+                        <span className="text-mainColor font-medium">
+                          {section.title}
+                        </span>
                         <ChevronDown
                           className={`w-5 h-5 transition-transform ${
-                            openSemester === i ? "rotate-180" : ""
+                            openSemester[tab.id] === i ? "rotate-180" : ""
                           }`}
                         />
                       </button>
                       <div
                         className={`transition-max-height duration-300 overflow-hidden ${
-                          openSemester === i ? "max-h-[1000px]" : "max-h-0"
+                          openSemester[tab.id] === i
+                            ? "max-h-[1000px]"
+                            : "max-h-0"
                         }`}
                       >
                         <ul className="list-disc list-inside text-gray-700 p-4 space-y-1">

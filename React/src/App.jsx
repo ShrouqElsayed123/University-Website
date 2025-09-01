@@ -31,6 +31,7 @@ import PhysicalTherapy from "./pages/facultiesPages/PhysicalTherapy";
 import Pharmacy from "./pages/facultiesPages/Pharmacy";
 import Nursing from "./pages/facultiesPages/Nursing";
 import ArtificialIntelligence from "./pages/facultiesPages/ArtificialIntelligence";
+import Layout1 from "./components/Dashboard Component/Layout";
 
 function App() {
   const { i18n } = useTranslation();
@@ -95,6 +96,16 @@ function App() {
 
       ]
     },
+    {
+      path: "/admin", element: (
+        <Layout1 />
+      ),
+      children: [
+      { path: "layout", element: <About /> },
+      // تقدر تضيفي صفحات تانية هنا: departments, news, ... 
+    ],
+    },
+    
   ]);
 
   return (

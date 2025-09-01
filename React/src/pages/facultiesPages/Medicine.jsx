@@ -5,6 +5,7 @@ import FacultyDoctors from "../../components/FaculitiesComponent/FacultyGallery/
 import FacultyLevels from "../../components/FaculitiesComponent/FacultyLevels";
 import { useTranslation } from "react-i18next";
 import VideoSection from "../../components/FaculitiesComponent/VideoSection";
+import FacultyGoals from "../../components/FaculitiesComponent/FacultyGoals";
 export default function Medicine() {
       const { t } = useTranslation();
   
@@ -20,10 +21,12 @@ return (
             {/* <FacultyGoal /> */}
 
             <FacultyOverview />
+            <FacultyGoals />
             <FacultyGallery />
             <FacultyDoctors />
             <FacultyLevels />
             <VideoSection />
+
         </div>
     );
 }

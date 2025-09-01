@@ -44,7 +44,9 @@ const resources = {
       tdoctors: "Professors",
       doctors: "Our Professional  <highlight>Professors</highlight>",
       tcourse: "Faculty&Courses",
-      course: "Faculty levels and  <highlight>courses</highlight>"
+      course: "Faculty levels and  <highlight>courses</highlight>",
+        tgoal:"Goals",
+      goal:"Faculty  <highlight>objectives</highlight>",
     }
   },
   ar: {
@@ -80,7 +82,9 @@ const resources = {
       contact: "تواصل  <highlight>معنا</highlight>",
       feedback: " أراء  <highlight>طلابنا</highlight>",
       toverview: "نظرة عامة",
-      overview: "نظرة عامة عن الكلية"
+      overview: "نظرة عامة عن الكلية",
+      tgoal:"الأهداف",
+      goal:"أهداف   <highlight>الكلية</highlight>",
 
     }
   }
