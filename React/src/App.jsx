@@ -31,7 +31,8 @@ import PhysicalTherapy from "./pages/facultiesPages/PhysicalTherapy";
 import Pharmacy from "./pages/facultiesPages/Pharmacy";
 import Nursing from "./pages/facultiesPages/Nursing";
 import ArtificialIntelligence from "./pages/facultiesPages/ArtificialIntelligence";
-import Layout1 from "./components/Dashboard Component/Layout";
+// import Layout1 from "./Admin/Dashboard Component/Layout";
+import DashboardLayout from "./Admin/Layout/DashboardLayout";
 
 function App() {
   const { i18n } = useTranslation();
@@ -98,7 +99,7 @@ function App() {
     },
     {
       path: "/admin", element: (
-        <Layout1 />
+        <DashboardLayout />
       ),
       children: [
       { path: "layout", element: <About /> },
