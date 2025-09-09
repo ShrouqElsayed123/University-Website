@@ -33,6 +33,8 @@ import Nursing from "./pages/facultiesPages/Nursing";
 import ArtificialIntelligence from "./pages/facultiesPages/ArtificialIntelligence";
 // import Layout1 from "./Admin/Dashboard Component/Layout";
 import DashboardLayout from "./Admin/Layout/DashboardLayout";
+import { HeroProvider } from "./Admin/Dashboard Component/Home Management component/Hero Section/Hero.Context";
+import HeroPage from "./Admin/Dashboard Pages/HeroPage/HeroPage";
 
 function App() {
   const { i18n } = useTranslation();
@@ -88,7 +90,7 @@ function App() {
         { path: 'engineering', element: <Engineering /> },
         { path: 'healthsciences', element: <HealthSciences /> },
         { path: 'humanities', element: <Humanities /> },
-        { path: 'veterinarymedicine', element: <VeterinaryMedicine/> },
+        { path: 'veterinarymedicine', element: <VeterinaryMedicine /> },
         { path: 'physicaltherapy', element: <PhysicalTherapy /> },
         { path: 'pharmacy', element: <Pharmacy /> },
         { path: 'nursing', element: <Nursing /> },
@@ -98,21 +100,24 @@ function App() {
       ]
     },
     {
-      path: "/admin", element: (
-        <DashboardLayout />
-      ),
+      path: "/admin",
+      element: <DashboardLayout />,
       children: [
-      { path: "layout", element: <About /> },
-      // تقدر تضيفي صفحات تانية هنا: departments, news, ... 
-    ],
-    },
-    
+        { index: true, element: <HeroPage /> }, // دي هتظهر لما تفتح /admin مباشرة
+      ],
+    }
+
+
   ]);
 
   return (
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <HeroProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+
+    </HeroProvider>
+
 
   );
 }
