@@ -35,6 +35,10 @@ import ArtificialIntelligence from "./pages/facultiesPages/ArtificialIntelligenc
 import DashboardLayout from "./Admin/Layout/DashboardLayout";
 import { HeroProvider } from "./Admin/Dashboard Component/Home Management component/Hero Section/Hero.Context";
 import HeroPage from "./Admin/Dashboard Pages/HeroPage/HeroPage";
+import StatisticsDashboard from "./Admin/Dashboard Pages/StatisticsDashboard/StatisticsDashboard";
+import AboutDashboard from "./Admin/Dashboard Pages/About Page/AboutDashboard";
+import VideoDashboard from "./Admin/Dashboard Pages/VideoDashboard/VideoDashboard";
+import FaqsDashboard from "./Admin/Dashboard Pages/FaqsDashboard/FaqsDashboard";
 
 function App() {
   const { i18n } = useTranslation();
@@ -103,7 +107,11 @@ function App() {
       path: "/admin",
       element: <DashboardLayout />,
       children: [
-        { index: true, element: <HeroPage /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'hero', element: <HeroPage /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'about', element: <AboutDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'stats', element: <StatisticsDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'video', element: <VideoDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'faqs', element: <FaqsDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
       ],
     }
 

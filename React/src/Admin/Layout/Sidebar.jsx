@@ -18,23 +18,66 @@ export default function Sidebar() {
               onClick={() => setOpenFaculties(!openFaculties)}
               className="flex items-center justify-between w-full p-2 rounded hover:bg-gray-200"
             >
-              <span>Faculties</span>
+              <span>Home Management</span>
               {openFaculties ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
             </button>
 
             {openFaculties && (
               <div className="ml-4 mt-1 space-y-1">
                 <Link
-                  to="/admin/faculties/list"
+                  to="hero"
                   className="block p-2 rounded hover:bg-gray-100 text-sm"
                 >
-                  Faculty List
+                  Hero Section
+                </Link>
+
+                <Link
+                  to="about"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  About Section
+                </Link>
+                <Link
+                  to="stats"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  Statistics Section
                 </Link>
                 <Link
                   to="/admin/faculties/add"
                   className="block p-2 rounded hover:bg-gray-100 text-sm"
                 >
-                  Add Faculty
+                  Video section
+                </Link>
+                <Link
+                  to="/admin/faculties/add"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  News Section
+                </Link>
+                <Link
+                  to="/admin/faculties/add"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  University Faculties
+                </Link>
+                <Link
+                  to="/admin/faculties/add"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  FAQs Section
+                </Link>
+                <Link
+                  to="/admin/faculties/add"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  Feedback Section
+                </Link>
+                <Link
+                  to="/admin/faculties/add"
+                  className="block p-2 rounded hover:bg-gray-100 text-sm"
+                >
+                  Contactus Section
                 </Link>
               </div>
             )}
