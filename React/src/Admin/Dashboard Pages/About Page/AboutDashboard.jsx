@@ -1,117 +1,138 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../../Dashboard Component/Home Management component/Header/Header";
 
 const initialAbout = {
-    title: "Menoufia National University",
-    description:
-        "جامعة المنوفية تتميز بمساحة كبيرة وعدد كليات متنوع وعدد كبير من الطلاب.",
-    images: [], // هنخليها فاضية عشان المستخدم يرفع الصور بنفسه
-    cards: [
-        { id: 1, type: "Message", icon: "🎓", content: "رسالة الجامعة مختصرة هنا..." },
-        { id: 2, type: "Vision", icon: "🌟", content: "رؤية الجامعة مختصرة هنا..." },
-    ],
+    paragraph1: "هذا نص البراجراف الأول من الكود",
+    paragraph2: "هذا نص البراجراف الثاني من الكود",
+    message: "رسالة الجامعة هنا",
+    vision: "رؤية الجامعة هنا",
+    imageUrl: ["https://via.placeholder.com/150", "https://via.placeholder.com/150"]
 };
 
 export default function AboutDashboard() {
-    const [aboutData, setAboutData] = useState(initialAbout);
+    const [aboutData, setAboutData] = useState(null);
     const [previews, setPreviews] = useState([]);
+    const apiUrl = "http://10.1.44.26:8085/home/aboutUs/allAboutUs";
+
+    // عند تحميل الصفحة: جلب البيانات
+    useEffect(() => {
+        axios.get(apiUrl)
+            .then(res => {
+                if (res.data && res.data.length) {
+                    // لو فيه بيانات موجودة، استخدم آخر واحدة
+                    const lastData = res.data[res.data.length - 1];
+                    setAboutData(lastData);
+                    setPreviews(lastData.imageUrl || []);
+                } else {
+                    // لو مفيش بيانات، اعمل POST مرة واحدة فقط
+                    axios.post(apiUrl, initialAbout)
+                        .then(postRes => {
+                            setAboutData(postRes.data);
+                            setPreviews(postRes.data.imageUrl || []);
+                        })
+                        .catch(err => console.error("Error posting initial data:", err));
+                }
+            })
+            .catch(err => console.error("Error fetching data:", err));
+    }, []);
+
+    if (!aboutData) return <p>Loading...</p>;
 
     const handleChange = (field, value) => {
         setAboutData({ ...aboutData, [field]: value });
     };
 
-    const handleCardChange = (id, value) => {
-        setAboutData({
-            ...aboutData,
-            cards: aboutData.cards.map((card) =>
-                card.id === id ? { ...card, content: value } : card
-            ),
-        });
+    const handleImageUpload = (e) => {
+        const files = Array.from(e.target.files).slice(0, 3);
+        const urls = files.map(file => URL.createObjectURL(file));
+        setPreviews(urls);
+        setAboutData({ ...aboutData, imageUrl: urls });
     };
 
-    // رفع الصور
-    const handleImageUpload = (e) => {
-        const files = Array.from(e.target.files).slice(0, 3); // ناخد أول 3 صور بس
-        setAboutData({ ...aboutData, images: files });
-
-        // previews للصور
-        const previewUrls = files.map((file) => URL.createObjectURL(file));
-        setPreviews(previewUrls);
+    const handleSave = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.put(`${apiUrl}/${aboutData.id}`, aboutData);
+            alert("تم حفظ التعديلات بنجاح!");
+        } catch (err) {
+            console.error(err);
+            alert("حدث خطأ أثناء الحفظ");
+        }
     };
 
     return (
         <div className="flex flex-col gap-6 p-6">
-            {/* العناوين */}
-            <label>Title</label>
-            <input
-                type="text"
-                value={aboutData.title}
-                onChange={(e) => handleChange("title", e.target.value)}
-                className="border p-2 rounded"
-            />
+            <Header title="About Us Section" />
+            <form>
+                <div className="space-y-6">
 
-            {/* الوصف */}
-            <label>para 1</label>
-            <textarea
-                value={aboutData.description}
-                onChange={(e) => handleChange("description", e.target.value)}
-                className="border p-2 rounded w-full h-24"
-            />
-            <label>para 2</label>
-            <textarea
-                value={aboutData.description}
-                onChange={(e) => handleChange("description", e.target.value)}
-                className="border p-2 rounded w-full h-24"
-            />
-
-            {/* رفع الصور */}
-            <div>
-                <label className="block mb-2">Upload up to 3 Images</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    onChange={handleImageUpload}
-                    className="border p-2 rounded"
-                />
-
-                {/* previews */}
-                <div className="flex gap-4 mt-4">
-                    {previews.map((src, index) => (
-                        <img
-                            key={index}
-                            src={src}
-                            alt={`preview-${index}`}
-                            className="w-32 h-32 object-cover rounded shadow"
-                        />
-                    ))}
-                </div>
-            </div>
-
-            {/* الكروت */}
-            <div className="flex gap-4">
-                {aboutData.cards.map((card) => (
-                    <div
-                        key={card.id}
-                        className="bg-white shadow p-4 rounded-lg flex flex-col gap-2 flex-1"
-                    >
-                        <span className="text-green-500 text-2xl">{card.icon}</span>
-                        <h4 className="font-bold">{card.type}</h4>
+                    <div>
+                        <label className="text-lg font-semibold mb-1 block">Paragraph 1</label>
                         <textarea
-                            value={card.content}
-                            onChange={(e) => handleCardChange(card.id, e.target.value)}
-                            className="border p-2 rounded h-20"
+                            value={aboutData.paragraph1 || ""}
+                            onChange={e => handleChange("paragraph1", e.target.value)}
+                            className="border p-2 rounded w-full h-24"
                         />
                     </div>
-                ))}
-            </div>
 
-            {/* زرار حفظ التعديلات */}
-            <button
-                onClick={() => console.log("Updated Data:", aboutData)}
-                className="bg-green-500 text-white px-4 py-2 rounded-lg w-max"
-            >
-                Save Changes
-            </button>
+                    <div>
+                        <label className="text-lg font-semibold mb-1 block">Paragraph 2</label>
+                        <textarea
+                            value={aboutData.paragraph2 || ""}
+                            onChange={e => handleChange("paragraph2", e.target.value)}
+                            className="border p-2 rounded w-full h-24"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-lg font-semibold mb-1 block">Message</label>
+                        <textarea
+                            value={aboutData.message || ""}
+                            onChange={e => handleChange("message", e.target.value)}
+                            className="border p-2 rounded w-full h-24"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="text-lg font-semibold mb-1 block">Vision</label>
+                        <textarea
+                            value={aboutData.vision || ""}
+                            onChange={e => handleChange("vision", e.target.value)}
+                            className="border p-2 rounded w-full h-24"
+                        />
+                    </div>
+
+                    {/* رفع الصور */}
+                    <div>
+                        <label className="text-lg font-semibold mb-1 block">Upload up to 3 Images</label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={handleImageUpload}
+                            className="border p-2 rounded"
+                        />
+                        <div className="flex gap-4 mt-4">
+                            {previews.map((src, index) => (
+                                <img
+                                    key={index}
+                                    src={src}
+                                    alt={`preview-${index}`}
+                                    className="w-32 h-32 object-cover rounded shadow"
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <button
+                        onClick={handleSave}
+                        className="bg-mainColor text-white px-4 py-2 rounded-lg w-max"
+                    >
+                        Save Changes
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }

@@ -8,8 +8,8 @@ export default function HeroPage() {
     const [editingItem, setEditingItem] = useState(null);
 
     const initialFormData = {
-        title: "",
-        subtitle: "",
+        para1: "",
+        para2: "",
         image: null,
         buttonText: "",
         buttonLink: "",
@@ -48,10 +48,10 @@ export default function HeroPage() {
     };
 
     return (
-        <div className="p-6">
+        <div className="p-6 flex flex-col items-end">
             <button
                 onClick={handleAdd}
-                className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+                className="mb-4 px-4  py-2 bg-mainColor text-white rounded hover:bg-mainColorDark1 transition"
             >
                 Add Hero Section
             </button>
