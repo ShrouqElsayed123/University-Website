@@ -44,7 +44,7 @@ export default function Sidebar() {
                   Statistics Section
                 </Link>
                 <Link
-                  to="/admin/faculties/add"
+                  to="video"
                   className="block p-2 rounded hover:bg-gray-100 text-sm"
                 >
                   Video section
@@ -62,13 +62,13 @@ export default function Sidebar() {
                   University Faculties
                 </Link>
                 <Link
-                  to="/admin/faculties/add"
+                  to="faqs"
                   className="block p-2 rounded hover:bg-gray-100 text-sm"
                 >
                   FAQs Section
                 </Link>
                 <Link
-                  to="/admin/faculties/add"
+                  to="feedback"
                   className="block p-2 rounded hover:bg-gray-100 text-sm"
                 >
                   Feedback Section

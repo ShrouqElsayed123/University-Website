@@ -39,6 +39,8 @@ import StatisticsDashboard from "./Admin/Dashboard Pages/StatisticsDashboard/Sta
 import AboutDashboard from "./Admin/Dashboard Pages/About Page/AboutDashboard";
 import VideoDashboard from "./Admin/Dashboard Pages/VideoDashboard/VideoDashboard";
 import FaqsDashboard from "./Admin/Dashboard Pages/FaqsDashboard/FaqsDashboard";
+import FeedbackPage from "./Admin/Dashboard Pages/FeedbackDashboard/FeedbackPage";
+import { FeedbackProvider } from "./Admin/Dashboard Component/Home Management component/Feedback Component/Feedback.context";
 
 function App() {
   const { i18n } = useTranslation();
@@ -112,6 +114,7 @@ function App() {
         { path: 'stats', element: <StatisticsDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
         { path: 'video', element: <VideoDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
         { path: 'faqs', element: <FaqsDashboard /> }, // دي هتظهر لما تفتح /admin مباشرة
+        { path: 'feedback', element: <FeedbackPage /> }, // دي هتظهر لما تفتح /admin مباشرة
       ],
     }
 
@@ -119,12 +122,14 @@ function App() {
   ]);
 
   return (
-    <HeroProvider>
-      <ThemeProvider>
-        <RouterProvider router={router} />
-      </ThemeProvider>
+    <FeedbackProvider>
+      <HeroProvider>
+        <ThemeProvider>
+          <RouterProvider router={router} />
+        </ThemeProvider>
 
-    </HeroProvider>
+      </HeroProvider>
+    </FeedbackProvider>
 
 
   );

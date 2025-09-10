@@ -1,13 +1,20 @@
 import { useState } from "react";
+import Header from "../../Dashboard Component/Home Management component/Header/Header";
+import { FaBookOpen, FaUserGraduate } from "react-icons/fa";
 
 export default function StatisticsDashboard() {
     const initialStats = [
-        { id: 1, label: "Number of Students", value: 25000, icon: "🎓" },
-        { id: 2, label: "Number of Faculties", value: 15, icon: "🏛️" },
-        { id: 3, label: "Number of Staff", value: 1200, icon: "👩‍🏫" },
-        { id: 4, label: "Campus Area (acres)", value: 350, icon: "🌳" }
+        { id: 1, label: "Number of Students", value: 25000, icon: "student" },
+        { id: 2, label: "Number of Faculties", value: 15, icon: "faculty" },
+        { id: 3, label: "Number of Staff", value: 1200, icon: "staff" },
+        { id: 4, label: "Number of Program", value: 350, icon: "program" }
     ];
-
+    const iconMap = {
+        "student": <FaBookOpen className="text-[30px]" />,
+        "faculty": <FaUserGraduate className="text-[30px]" />,
+        "staff": <i className={`fa-solid fa-building-columns text-[30px]	`}></i>,
+        "program": <i className={`fa-solid fa-chalkboard-user text-[30px]`}></i>,
+    }
     const [stats, setStats] = useState(initialStats);
 
     const handleChange = (id, field, value) => {
@@ -18,12 +25,12 @@ export default function StatisticsDashboard() {
 
     return (
         <div className="flex flex-col gap-6 p-6">
-            <h2 className="text-2xl font-bold text-yellow-500">University Statistics</h2>
+            <Header title="Statistics Section" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map(stat => (
                     <div key={stat.id} className="bg-white shadow p-4 rounded-lg flex flex-col items-start gap-2">
-                        <span className="text-green-500 text-3xl">{stat.icon}</span>
+                        <span className="text-secondaryColor/70">{iconMap[stat.icon]}</span>
                         <input
                             type="text"
                             value={stat.label}
@@ -42,7 +49,7 @@ export default function StatisticsDashboard() {
 
             <button
                 onClick={() => console.log("Updated Statistics:", stats)}
-                className="bg-green-500 text-white px-4 py-2 rounded-lg w-max mt-4"
+                className="bg-mainColor text-white px-4 py-2 rounded-lg w-max mt-4"
             >
                 Save Changes
             </button>

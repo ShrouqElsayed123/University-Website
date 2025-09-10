@@ -2,7 +2,8 @@ import { useState } from "react";
 
 export default function FaqsDashboard() {
     // ✅ Object واحد لكل البيانات
-    const [faqsData, setFaqsData] = useState({
+    const [faqsData, setFaqsData] = useState(
+        {
         header: "Frequently Asked Questions",
         paragraph:
             "Here you can find answers to the most common questions about our university.",
